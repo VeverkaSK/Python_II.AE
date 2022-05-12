@@ -1,12 +1,14 @@
 import turtle
 from random import *
 
+
 po = 100  # sem zadaj svoj pocet opakovani
+ry = 1000 # sem zadaj rychlost kreslenia
 print("Nakreslim", po, "tvarov")
 
 t = turtle.Turtle()
 turtle.colormode(255)
-t.speed(1000)
+t.speed(ry)
 
 
 def random():
