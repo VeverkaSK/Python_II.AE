@@ -1,5 +1,4 @@
 import pygame
-import time
 import random
 
 pygame.init()
@@ -27,18 +26,18 @@ y1c = 0
 clock = pygame.time.Clock()
 snakeSpeed = 10
 
-font = pygame.font.SysFont("comicsansms", 50)
-skoreFont = pygame.font.SysFont("comicsansms", 35)
+font = pygame.font.SysFont("comicsansms", 32)
+skoreFont = pygame.font.SysFont("comicsansms", 32)
 
 
 def skore(skore):
-    value = skoreFont.render("Tvoje skóre: " + str(skore), True, red)
+    value = skoreFont.render("Score: " + str(skore), True, red)
     dis.blit(value, [0, 0])
 
 
 def mSnake(snakeSq, snakeL):
     for x in snakeL:
-        pygame.draw.rect(dis, black, [x[0], x[1], snakeSq, snakeSq])
+        pygame.draw.rect(dis, white, [x[0], x[1], snakeSq, snakeSq])
 
 
 def message(msg, color):
@@ -64,10 +63,10 @@ def gameLoop():
 
     while not gameOver:
         while gameClose == True:
-            dis.fill(white)
-            message("Prehral si!", red)
+            dis.fill(black)
+            text = font.render("Prehral si! Q = Quit | C = Again", True, red)
+            dis.blit(text, (text.get_rect(center=(dis_width / 2, dis_height / 2))))
             skore(snakeD - 1)
-            pygame.display.set_caption('Q = Pre vypnutie | C = Znovu')
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -100,7 +99,7 @@ def gameLoop():
 
         x1 += x1c
         y1 += y1c
-        dis.fill(white)
+        dis.fill(black)
 
 
         pygame.draw.rect(dis, green, [fx, fy, snakeSq, snakeSq])
@@ -108,7 +107,7 @@ def gameLoop():
         snakeH.append(x1)
         snakeH.append(y1)
         snakeL.append(snakeH)
-        print("fx:", fx, "| fy:", fy, "| x1:", x1, "| y1:", y1)
+        # print("fx:", fx, "| fy:", fy, "| x1:", x1, "| y1:", y1)
 
         if len(snakeL) > snakeD:
             del snakeL[0]
@@ -126,7 +125,6 @@ def gameLoop():
             fx = round(random.randrange(0, dis_width - snakeSq) / 10.0) * 10.0
             fy = round(random.randrange(0, dis_height - snakeSq) / 10.0) * 10.0
             snakeD += 1
-
         clock.tick(snakeSpeed)
 
     pygame.quit()
